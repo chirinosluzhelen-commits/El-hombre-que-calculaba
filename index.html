@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El hombre que calculaba</title>
+
+  <!-- Tipos de letra (necesitan internet; si no hay, se usan letras normales) -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Archivo de estilos (debe estar en la misma carpeta) -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ================= CABECERA ================= -->
+  <header class="cabecera">
+    <div class="contenedor">
+      <p class="etiqueta">Beremiz Samir · Bagdad</p>
+      <h1>El hombre que calculaba</h1>
+      <p>Cuatro problemas resueltos con JavaScript y formularios. La página no se recarga: escribe tus datos y pulsa el botón.</p>
+    </div>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- ================= PESTAÑAS ================= -->
+    <nav class="pestanas">
+      <button class="pestana activa" onclick="mostrarPestana(0)"><small>Ejercicio 12</small><span>Ecuación cuadrática</span></button>
+      <button class="pestana" onclick="mostrarPestana(1)"><small>Ejercicio 13</small><span>El valor de π</span></button>
+      <button class="pestana" onclick="mostrarPestana(2)"><small>Capítulo III</small><span>Los 35 camellos</span></button>
+      <button class="pestana" onclick="mostrarPestana(3)"><small>Capítulo IV</small><span>Los 8 panes</span></button>
+    </nav>
+
+    <!-- ================= PROBLEMA 1: EJERCICIO 12 ================= -->
+    <section class="problema">
+      <p class="etiqueta">Ejercicio 12 · de la hoja</p>
+      <h2>Raíces de una ecuación cuadrática</h2>
+
+      <div class="columnas">
+        <div class="ficha">
+          <h3>Descripción</h3>
+          <p>Un programa que pide las constantes <code>a</code>, <code>b</code> y <code>c</code> de la ecuación <code>ax² + bx + c = 0</code>. Calcula el discriminante <code>D = b² − 4ac</code> y, según su valor, dice si hay dos raíces, una o ninguna raíz real.</p>
+
+          <h3>Algoritmo</h3>
+          <ol>
+            <li>Leer a, b y c.</li>
+            <li>Si a = 0, avisar que no es cuadrática.</li>
+            <li>Calcular D = b² − 4ac.</li>
+            <li>Si D &gt; 0: dos raíces, x = (−b ± √D) / 2a.</li>
+            <li>Si D = 0: una raíz, x = −b / 2a.</li>
+            <li>Si D &lt; 0: no tiene raíces reales.</li>
+          </ol>
+
+          <h3>Entrada de datos</h3>
+          <p>Tres números: a (distinto de cero), b y c. Pueden ser enteros o decimales, positivos o negativos.</p>
+
+          <h3>Salida</h3>
+          <p>El mensaje según D, el valor de D y las raíces cuando existen.</p>
+        </div>
+
+        <div class="formulario">
+          <h3>Pruébalo</h3>
+          <form onsubmit="resolver12(event)">
+            <div class="campos">
+              <div><label for="a12">a</label><input id="a12" type="number" step="any" value="-3"></div>
+              <div><label for="b12">b</label><input id="b12" type="number" step="any" value="7"></div>
+              <div><label for="c12">c</label><input id="c12" type="number" step="any" value="5"></div>
+            </div>
+            <div class="fila">
+              <button class="boton" type="submit">Calcular raíces</button>
+            </div>
+          </form>
+
+          <p class="nota">Las tres ecuaciones de la hoja:</p>
+          <div class="fila" style="margin-top: 6px;">
+            <button class="ejemplo" type="button" onclick="ejemplo12(3, 6, 3)">(a) 3x² + 6x + 3</button>
+            <button class="ejemplo" type="button" onclick="ejemplo12(-3, 4, -6)">(b) −3x² + 4x − 6</button>
+            <button class="ejemplo" type="button" onclick="ejemplo12(-3, 7, 5)">(c) −3x² + 7x + 5</button>
+          </div>
+
+          <div class="resultado" id="resultado12"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROBLEMA 2: EJERCICIO 13 ================= -->
+    <section class="problema" style="display: none;">
+      <p class="etiqueta">Ejercicio 13 · de la hoja</p>
+      <h2>Estimar π con un ciclo</h2>
+
+      <div class="columnas">
+        <div class="ficha">
+          <h3>Descripción</h3>
+          <p>El valor de π se puede estimar con la expresión <code>√(6 · Σ 1/k²)</code>, sumando desde k = 1 hasta n. Se programa con un ciclo <code>for</code> y se compara con el valor real de π. Mientras más grande es n, más cerca queda. El «format long» de la hoja equivale a mostrar 15 decimales.</p>
+
+          <h3>Algoritmo</h3>
+          <ol>
+            <li>Leer n.</li>
+            <li>Empezar con suma = 0.</li>
+            <li>Para k desde 1 hasta n: suma = suma + 1 / (k · k).</li>
+            <li>Calcular piEstimado = √(6 · suma).</li>
+            <li>Calcular error = |π − piEstimado|.</li>
+            <li>Mostrar los resultados con 15 decimales.</li>
+          </ol>
+
+          <h3>Entrada de datos</h3>
+          <p>Un número entero positivo n (cualquiera). La hoja pide 100, 10 000 y 1 000 000, pero puedes probar otros.</p>
+
+          <h3>Salida</h3>
+          <p>La aproximación de π, el valor real (<code>Math.PI</code>) y el error.</p>
+        </div>
+
+        <div class="formulario">
+          <h3>Pruébalo</h3>
+          <form onsubmit="resolver13(event)">
+            <div class="campos">
+              <div><label for="n13">n (términos de la suma)</label><input id="n13" type="number" step="1" min="1" value="10000"></div>
+            </div>
+            <div class="fila">
+              <button class="boton" type="submit">Estimar π</button>
+              <button class="boton boton-claro" type="button" onclick="tabla13()">Los tres valores de la hoja</button>
+            </div>
+          </form>
+
+          <p class="nota">Valores rápidos:</p>
+          <div class="fila" style="margin-top: 6px;">
+            <button class="ejemplo" type="button" onclick="ejemplo13(100)">n = 100</button>
+            <button class="ejemplo" type="button" onclick="ejemplo13(10000)">n = 10 000</button>
+            <button class="ejemplo" type="button" onclick="ejemplo13(1000000)">n = 1 000 000</button>
+          </div>
+
+          <div class="resultado" id="resultado13"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROBLEMA 3: LOS 35 CAMELLOS ================= -->
+    <section class="problema" style="display: none;">
+      <p class="etiqueta">Capítulo III · El hombre que calculaba</p>
+      <h2>Los 35 camellos</h2>
+
+      <div class="columnas">
+        <div class="ficha">
+          <h3>Descripción del capítulo</h3>
+          <p>Tres hermanos discuten por una herencia de 35 camellos: el mayor debe recibir la mitad, el segundo un tercio y el menor un noveno. Pero 35 no se puede dividir en esas partes sin partir camellos. Beremiz presta su propio camello: ahora son 36 y el reparto sale exacto (18, 12 y 4). Se reparten 34 y sobran 2.</p>
+
+          <h3>Algoritmo</h3>
+          <ol>
+            <li>Leer el total de camellos y los tres denominadores.</li>
+            <li>Revisar que las fracciones sumen 1 o menos.</li>
+            <li><b>Con redondeo:</b> calcular total / d con decimales, redondear con <code>Math.round</code> y ver cuántos camellos sobran o faltan.</li>
+            <li><b>Método de Beremiz:</b> probar con 0, 1, 2, 3... camellos prestados hasta que el nuevo total se divida exacto entre los tres denominadores.</li>
+            <li>Calcular lo que sobra: total con prestados − camellos repartidos.</li>
+            <li>Devolver los prestados; lo demás es el premio de Beremiz.</li>
+          </ol>
+
+          <h3>Entrada de datos</h3>
+          <p>El total de camellos (cualquier número entero) y los denominadores de las fracciones de cada hermano.</p>
+
+          <h3>Salida</h3>
+          <p>Las partes reales con decimales, las partes redondeadas, el reparto de Beremiz cuando existe, cuántos camellos sobran y por qué sobran.</p>
+        </div>
+
+        <div class="formulario">
+          <h3>Pruébalo</h3>
+          <form onsubmit="resolver35(event)">
+            <div class="campos">
+              <div><label for="total35">Camellos</label><input id="total35" type="number" step="1" min="1" value="35"></div>
+              <div><label for="d1-35">Mayor: 1 /</label><input id="d1-35" type="number" step="1" min="1" value="2"></div>
+              <div><label for="d2-35">Segundo: 1 /</label><input id="d2-35" type="number" step="1" min="1" value="3"></div>
+              <div><label for="d3-35">Menor: 1 /</label><input id="d3-35" type="number" step="1" min="1" value="9"></div>
+            </div>
+            <div class="fila">
+              <button class="boton" type="submit">Repartir camellos</button>
+            </div>
+          </form>
+
+          <p class="nota">Casos para probar:</p>
+          <div class="fila" style="margin-top: 6px;">
+            <button class="ejemplo" type="button" onclick="ejemplo35(35, 2, 3, 9)">Libro: 35</button>
+            <button class="ejemplo" type="button" onclick="ejemplo35(17, 2, 3, 9)">Variante: 17</button>
+            <button class="ejemplo" type="button" onclick="ejemplo35(71, 2, 3, 9)">71 camellos</button>
+            <button class="ejemplo" type="button" onclick="ejemplo35(100, 2, 4, 5)">100 y 1/2, 1/4, 1/5</button>
+          </div>
+
+          <div class="resultado" id="resultado35"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROBLEMA 4: LOS 8 PANES ================= -->
+    <section class="problema" style="display: none;">
+      <p class="etiqueta">Capítulo IV · El hombre que calculaba</p>
+      <h2>Los ocho panes y las ocho monedas</h2>
+
+      <div class="columnas">
+        <div class="ficha">
+          <h3>Descripción del capítulo</h3>
+          <p>Dos viajeros comparten su comida con un jeque hambriento: uno lleva 5 panes y el otro 3. Los tres comen partes iguales de los 8 panes y el jeque paga 8 monedas. El reparto que parece justo es 5 y 3 monedas, una por pan. Beremiz demuestra que no lo es: cada uno comió 8/3 de pan, así que el primero le dio al jeque 7/3 y el segundo solo 1/3. Lo justo es 7 monedas y 1 moneda.</p>
+
+          <h3>Algoritmo</h3>
+          <ol>
+            <li>Leer los panes de cada viajero y las monedas.</li>
+            <li>Calcular cuánto come cada uno: (panes1 + panes2) / 3.</li>
+            <li>Calcular el aporte al jeque: panes − lo que comió.</li>
+            <li>Si algún aporte es negativo, avisar que no aplica.</li>
+            <li>Repartir monedas en proporción al aporte (con decimales).</li>
+            <li><b>Con redondeo:</b> redondear con <code>Math.round</code> las monedas del 1.º (no se puede pagar media moneda) y darle al 2.º las que queden.</li>
+            <li>Calcular también el reparto ingenuo (una moneda por pan), redondeado, para comparar.</li>
+          </ol>
+
+          <h3>Entrada de datos</h3>
+          <p>Panes del primer viajero, panes del segundo y monedas que paga el jeque. Pueden ser decimales.</p>
+
+          <h3>Salida</h3>
+          <p>Cuánto pan comió cada uno, cuánto aportó, las monedas justas con decimales y ya redondeadas, y el reparto ingenuo para comparar.</p>
+        </div>
+
+        <div class="formulario">
+          <h3>Pruébalo</h3>
+          <form onsubmit="resolver8(event)">
+            <div class="campos">
+              <div><label for="p1-8">Panes del 1.º</label><input id="p1-8" type="number" step="any" min="0" value="5"></div>
+              <div><label for="p2-8">Panes del 2.º</label><input id="p2-8" type="number" step="any" min="0" value="3"></div>
+              <div><label for="m8">Monedas</label><input id="m8" type="number" step="any" min="0" value="8"></div>
+            </div>
+            <div class="fila">
+              <button class="boton" type="submit">Repartir monedas</button>
+            </div>
+          </form>
+
+          <p class="nota">Casos para probar:</p>
+          <div class="fila" style="margin-top: 6px;">
+            <button class="ejemplo" type="button" onclick="ejemplo8(5, 3, 8)">Libro: 5 y 3</button>
+            <button class="ejemplo" type="button" onclick="ejemplo8(7, 5, 12)">Variante: 7 y 5</button>
+            <button class="ejemplo" type="button" onclick="ejemplo8(8, 1, 9)">No aplica: 8 y 1</button>
+          </div>
+
+          <div class="resultado" id="resultado8"></div>
+        </div>
+      </div>
+    </section>
+
+    <p class="pie">Basado en «El hombre que calculaba», de Malba Tahan. La numeración de los capítulos puede variar según la edición.</p>
+  </main>
+
+
+  <script>
+    /* =========================================================
+       JAVASCRIPT - El hombre que calculaba
+       Está dividido en partes: ayudas, pestañas y un bloque por problema
+       ========================================================= */
+
+
+    /* ---------- PARTE 1: AYUDAS ---------- */
+
+    // Atajo para no escribir document.getElementById cada vez
+    function porId(id) {
+      return document.getElementById(id);
+    }
+
+    // Quita ceros sobrantes: 18.000000 se muestra como 18
+    function limpiar(numero) {
+      return Number(numero.toFixed(4)).toString();
+    }
+
+    // Escribe " + 5" o " − 5" según el signo (para mostrar la ecuación)
+    function conSigno(numero) {
+      if (numero < 0) {
+        return " − " + limpiar(-numero);
+      }
+      return " + " + limpiar(numero);
+    }
+
+    // Convierte una lista de pares [nombre, valor] en una lista HTML
+    function listaDatos(filas) {
+      let html = '<dl class="datos">';
+      for (let i = 0; i < filas.length; i++) {
+        html = html + "<dt>" + filas[i][0] + "</dt><dd>" + filas[i][1] + "</dd>";
+      }
+      html = html + "</dl>";
+      return html;
+    }
+
+    // Dibuja el resultado en la caja indicada
+    // tipo puede ser: "bien" (verde), "aviso" (dorado) o "mal" (rojo)
+    function mostrarResultado(idCaja, tipo, sello, mensaje, detalle) {
+      let html = '<span class="sello ' + tipo + '">' + sello + "</span>";
+      html = html + '<p class="mensaje">' + mensaje + "</p>";
+      html = html + detalle;
+      porId(idCaja).innerHTML = html;
+    }
+
+
+    /* ---------- PARTE 2: PESTAÑAS ---------- */
+
+    function mostrarPestana(numero) {
+      const problemas = document.getElementsByClassName("problema");
+      const botones = document.getElementsByClassName("pestana");
+
+      for (let i = 0; i < problemas.length; i++) {
+        if (i === numero) {
+          problemas[i].style.display = "block";
+          botones[i].classList.add("activa");
+        } else {
+          problemas[i].style.display = "none";
+          botones[i].classList.remove("activa");
+        }
+      }
+    }
+
+
+    /* ---------- PARTE 3: EJERCICIO 12 (ecuación cuadrática) ---------- */
+
+    function resolver12(evento) {
+      evento.preventDefault();   // evita que la página se recargue
+
+      // 1. Leer los datos (parseFloat convierte el texto en número)
+      const a = parseFloat(porId("a12").value);
+      const b = parseFloat(porId("b12").value);
+      const c = parseFloat(porId("c12").value);
+
+      // 2. Validar
+      if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        mostrarResultado("resultado12", "mal", "Faltan datos", "Escribe los tres números a, b y c.", "");
+        return;
+      }
+      if (a === 0) {
+        mostrarResultado("resultado12", "mal", "a = 0", "Con a = 0 no es una ecuación cuadrática. Escribe un valor de a distinto de cero.", "");
+        return;
+      }
+
+      // 3. Calcular el discriminante
+      const D = b * b - 4 * a * c;
+
+      // 4. Decidir según D
+      const ecuacion = limpiar(a) + "x²" + conSigno(b) + "x" + conSigno(c) + " = 0";
+      let filas = [["Ecuación", ecuacion], ["Discriminante D", limpiar(D)]];
+
+      if (D > 0) {
+        const x1 = (-b + Math.sqrt(D)) / (2 * a);
+        const x2 = (-b - Math.sqrt(D)) / (2 * a);
+        filas.push(["x1", limpiar(x1)]);
+        filas.push(["x2", limpiar(x2)]);
+        mostrarResultado("resultado12", "bien", "D > 0", "La ecuación tiene dos raíces", listaDatos(filas));
+      } else if (D === 0) {
+        const x = -b / (2 * a);
+        filas.push(["x", limpiar(x)]);
+        mostrarResultado("resultado12", "aviso", "D = 0", "La ecuación tiene una raíz", listaDatos(filas));
+      } else {
+        mostrarResultado("resultado12", "mal", "D < 0", "La ecuación no tiene raíces reales", listaDatos(filas));
+      }
+    }
+
+    // Botones de ejemplo: llenan el formulario y calculan
+    function ejemplo12(a, b, c) {
+      porId("a12").value = a;
+      porId("b12").value = b;
+      porId("c12").value = c;
+      resolver12(new Event("submit"));
+    }
+
+
+    /* ---------- PARTE 4: EJERCICIO 13 (valor de pi) ---------- */
+
+    // Esta función hace el ciclo y devuelve la estimación de pi
+    function estimarPi(n) {
+      let suma = 0;
+      for (let k = 1; k <= n; k++) {
+        suma = suma + 1 / (k * k);
+      }
+      return Math.sqrt(6 * suma);
+    }
+
+    function resolver13(evento) {
+      evento.preventDefault();
+
+      const n = parseInt(porId("n13").value);
+
+      if (isNaN(n) || n < 1) {
+        mostrarResultado("resultado13", "mal", "Dato no válido", "Escribe un número entero n mayor o igual a 1.", "");
+        return;
+      }
+      // Solo por seguridad: un ciclo de miles de millones congelaría la página
+      if (n > 100000000) {
+        mostrarResultado("resultado13", "aviso", "n muy grande", "Para que la página no se congele, usa un n menor a 100 000 000.", "");
+        return;
+      }
+
+      const estimado = estimarPi(n);
+      const error = Math.abs(Math.PI - estimado);
+
+      // toFixed(15) equivale a "format long" de la hoja
+      const filas = [
+        ["n", n.toLocaleString("es")],
+        ["Aproximación", estimado.toFixed(15)],
+        ["π (Math.PI)", Math.PI.toFixed(15)],
+        ["Error", error.toFixed(15)]
+      ];
+      mostrarResultado("resultado13", "bien", "Calculado", "π ≈ " + estimado.toFixed(15), listaDatos(filas));
+    }
+
+    function ejemplo13(n) {
+      porId("n13").value = n;
+      resolver13(new Event("submit"));
+    }
+
+    // Tabla con los tres valores que pide la hoja
+    function tabla13() {
+      const valores = [100, 10000, 1000000];
+      let html = '<span class="sello bien">Tres ejecuciones</span>';
+      html = html + '<div class="tabla-scroll"><table><tr><th>n</th><th>Aproximación</th><th>Error</th></tr>';
+
+      for (let i = 0; i < valores.length; i++) {
+        const estimado = estimarPi(valores[i]);
+        const error = Math.abs(Math.PI - estimado);
+        html = html + "<tr><td>" + valores[i].toLocaleString("es") + "</td><td>" + estimado.toFixed(15) + "</td><td>" + error.toFixed(15) + "</td></tr>";
+      }
+      html = html + "<tr><td>π real</td><td>" + Math.PI.toFixed(15) + "</td><td>0</td></tr>";
+      html = html + "</table></div>";
+
+      porId("resultado13").innerHTML = html;
+    }
+
+
+    /* ---------- PARTE 5: LOS 35 CAMELLOS ---------- */
+
+    function resolver35(evento) {
+      evento.preventDefault();
+
+      // 1. Leer los datos (parseInt convierte el texto en número entero)
+      const total = parseInt(porId("total35").value);
+      const d1 = parseInt(porId("d1-35").value);
+      const d2 = parseInt(porId("d2-35").value);
+      const d3 = parseInt(porId("d3-35").value);
+
+      if (isNaN(total) || isNaN(d1) || isNaN(d2) || isNaN(d3) || total < 1 || d1 < 1 || d2 < 1 || d3 < 1) {
+        mostrarResultado("resultado35", "mal", "Datos no válidos", "Escribe números enteros mayores o iguales a 1.", "");
+        return;
+      }
+
+      // 2. Las fracciones deben sumar 1 o menos (si no, el testamento pide más de lo que hay)
+      const sumaFracciones = 1 / d1 + 1 / d2 + 1 / d3;
+      if (sumaFracciones > 1.0000001) {
+        mostrarResultado("resultado35", "mal", "No es posible", "Las fracciones suman " + limpiar(sumaFracciones) + ", más que la herencia completa. Cambia los denominadores.", "");
+        return;
+      }
+
+      // 3. MÉTODO CON REDONDEO
+      // Parte real (con decimales) y parte redondeada de cada hermano
+      const real1 = total / d1;
+      const real2 = total / d2;
+      const real3 = total / d3;
+      const red1 = Math.round(real1);
+      const red2 = Math.round(real2);
+      const red3 = Math.round(real3);
+      const repartidosRedondeo = red1 + red2 + red3;
+      const diferencia = total - repartidosRedondeo;   // positivo = sobran, negativo = faltan
+
+      const filasRedondeo = [
+        ["Mayor (1/" + d1 + ")", limpiar(real1) + " → " + red1],
+        ["Segundo (1/" + d2 + ")", limpiar(real2) + " → " + red2],
+        ["Menor (1/" + d3 + ")", limpiar(real3) + " → " + red3],
+        ["Repartidos", repartidosRedondeo + " de " + total]
+      ];
+
+      let textoDiferencia = "";
+      if (diferencia > 0) {
+        textoDiferencia = "Con el redondeo sobran " + diferencia + " camello(s) sin dueño.";
+      } else if (diferencia < 0) {
+        textoDiferencia = "Con el redondeo faltan " + (-diferencia) + " camello(s): se reparten más de los que hay.";
+      } else {
+        textoDiferencia = "Con el redondeo el reparto queda justo.";
+      }
+
+      // 4. MÉTODO DE BEREMIZ
+      // Probamos con 0, 1, 2, 3... camellos prestados hasta que el reparto sea exacto
+      let prestados = -1;     // -1 significa "todavía no encontré ninguno"
+      for (let k = 0; k <= 100; k++) {
+        const nuevoTotal = total + k;
+        const divideExacto = (nuevoTotal % d1 === 0) && (nuevoTotal % d2 === 0) && (nuevoTotal % d3 === 0);
+
+        if (divideExacto) {
+          const repartidos = nuevoTotal / d1 + nuevoTotal / d2 + nuevoTotal / d3;
+          const sobran = nuevoTotal - repartidos;
+          // Solo sirve si alcanza para devolver los camellos prestados
+          if (sobran >= k) {
+            prestados = k;
+            break;          // ya lo encontramos, salimos del ciclo
+          }
+        }
+      }
+
+      let detalleBeremiz = "";
+      if (prestados === -1) {
+        detalleBeremiz = '<p class="explicacion">Con estos denominadores el truco de prestar camellos no funciona (probé hasta 100 prestados). Queda el reparto con redondeo.</p>';
+      } else {
+        const nuevoTotal = total + prestados;
+        const p1 = nuevoTotal / d1;
+        const p2 = nuevoTotal / d2;
+        const p3 = nuevoTotal / d3;
+        const sobran = nuevoTotal - (p1 + p2 + p3);
+        const premio = sobran - prestados;
+
+        const filasBeremiz = [
+          ["Camellos prestados", prestados],
+          ["Nuevo total", total + " + " + prestados + " = " + nuevoTotal],
+          ["Mayor", p1],
+          ["Segundo", p2],
+          ["Menor", p3],
+          ["Sobran", sobran],
+          ["Se devuelven", prestados],
+          ["Premio de Beremiz", premio]
+        ];
+        detalleBeremiz = listaDatos(filasBeremiz);
+        detalleBeremiz = detalleBeremiz + '<p class="explicacion">Las fracciones suman ' + limpiar(sumaFracciones) + ', menos que 1. Por eso, cuando el reparto sale exacto, siempre sobra un pedazo de la herencia: (1 − ' + limpiar(sumaFracciones) + ') × ' + nuevoTotal + ' = ' + sobran + ' camello(s). Cada hermano recibe más de lo que le tocaba, y todos quedan contentos.</p>';
+      }
+
+      // 5. Mostrar todo junto
+      let detalle = '<p class="subtitulo">Método con redondeo</p>' + listaDatos(filasRedondeo);
+      detalle = detalle + '<p class="explicacion">' + textoDiferencia + "</p>";
+      detalle = detalle + '<p class="subtitulo">Método de Beremiz</p>' + detalleBeremiz;
+
+      if (prestados === -1) {
+        mostrarResultado("resultado35", "aviso", "Solo redondeo", "No hay reparto exacto con camellos prestados.", detalle);
+      } else if (prestados === 0) {
+        mostrarResultado("resultado35", "bien", "Reparto exacto", "No hace falta prestar camellos: el reparto ya sale exacto.", detalle);
+      } else {
+        mostrarResultado("resultado35", "bien", "Reparto exacto", "Beremiz presta " + prestados + " camello(s) y todos reciben camellos enteros.", detalle);
+      }
+    }
+
+    function ejemplo35(total, d1, d2, d3) {
+      porId("total35").value = total;
+      porId("d1-35").value = d1;
+      porId("d2-35").value = d2;
+      porId("d3-35").value = d3;
+      resolver35(new Event("submit"));
+    }
+
+
+    /* ---------- PARTE 6: LOS 8 PANES ---------- */
+
+    function resolver8(evento) {
+      evento.preventDefault();
+
+      const panes1 = parseFloat(porId("p1-8").value);
+      const panes2 = parseFloat(porId("p2-8").value);
+      const monedas = parseFloat(porId("m8").value);
+
+      if (isNaN(panes1) || isNaN(panes2) || isNaN(monedas) || panes1 <= 0 || panes2 <= 0 || monedas <= 0) {
+        mostrarResultado("resultado8", "mal", "Datos no válidos", "Escribe números mayores que cero.", "");
+        return;
+      }
+
+      // Los tres (dos viajeros y el jeque) comen la misma cantidad
+      const totalPanes = panes1 + panes2;
+      const cadaUnoCome = totalPanes / 3;
+
+      // Pan que cada viajero le dio al jeque
+      const aporte1 = panes1 - cadaUnoCome;
+      const aporte2 = panes2 - cadaUnoCome;
+
+      if (aporte1 < 0 || aporte2 < 0) {
+        mostrarResultado("resultado8", "aviso", "No aplica", "Uno de los viajeros tiene menos de la tercera parte del pan y no le dio nada al jeque. Prueba panes más parecidos.", listaDatos([["Cada uno come", limpiar(cadaUnoCome) + " panes"]]));
+        return;
+      }
+
+      // Las monedas se reparten en proporción a lo que cada uno aportó (con decimales)
+      const monedas1 = monedas * aporte1 / (aporte1 + aporte2);
+      const monedas2 = monedas - monedas1;
+
+      // CON REDONDEO: una moneda no se puede partir, así que se redondea la del 1.º
+      // y la del 2.º se calcula restando, para que el total siga siendo el mismo
+      const redondeo1 = Math.round(monedas1);
+      const redondeo2 = monedas - redondeo1;
+
+      // Reparto ingenuo: una moneda por pan (también redondeado)
+      const ingenuo1 = Math.round(monedas * panes1 / totalPanes);
+      const ingenuo2 = monedas - ingenuo1;
+
+      // Cuánto se perjudica cada viajero con el reparto ingenuo
+      const diferencia1 = redondeo1 - ingenuo1;   // positivo: el 1.º gana con el reparto justo
+      const diferencia2 = redondeo2 - ingenuo2;
+
+      const filas = [
+        ["Cada uno come", limpiar(cadaUnoCome) + " → " + cadaUnoCome.toFixed(2) + " panes"],
+        ["Aporte del 1.º", limpiar(aporte1) + " → " + aporte1.toFixed(2) + " panes"],
+        ["Aporte del 2.º", limpiar(aporte2) + " → " + aporte2.toFixed(2) + " panes"]
+      ];
+
+      let detalle = '<p class="subtitulo">Cuentas con decimales</p>' + listaDatos(filas);
+
+      const filasMonedas = [
+        ["Monedas del 1.º", limpiar(monedas1) + " → " + redondeo1],
+        ["Monedas del 2.º", limpiar(monedas2) + " → " + limpiar(redondeo2)],
+        ["Reparto ingenuo", ingenuo1 + " y " + limpiar(ingenuo2)]
+      ];
+      detalle = detalle + '<p class="subtitulo">Reparto con redondeo</p>' + listaDatos(filasMonedas);
+
+      let comparacion = "Con el reparto ingenuo el 1.º se queda con " + limpiar(Math.abs(diferencia1)) + " moneda(s) " + (diferencia1 >= 0 ? "menos" : "más") + " y el 2.º con " + limpiar(Math.abs(diferencia2)) + " " + (diferencia2 >= 0 ? "menos" : "más") + " de lo justo.";
+      if (diferencia1 === 0) {
+        comparacion = "En este caso el reparto justo y el ingenuo coinciden al redondear.";
+      }
+      detalle = detalle + '<p class="explicacion">Las monedas no se pueden partir: se redondea la del 1.º con Math.round y la del 2.º es lo que queda, así el total siempre es ' + limpiar(monedas) + ". " + comparacion + "</p>";
+
+      mostrarResultado("resultado8", "bien", "Reparto justo", "El 1.º recibe " + redondeo1 + " monedas y el 2.º recibe " + limpiar(redondeo2) + ".", detalle);
+    }
+
+    function ejemplo8(panes1, panes2, monedas) {
+      porId("p1-8").value = panes1;
+      porId("p2-8").value = panes2;
+      porId("m8").value = monedas;
+      resolver8(new Event("submit"));
+    }
+
+
+    /* ---------- PARTE 7: AL ABRIR LA PÁGINA ---------- */
+    // Cada problema empieza con un ejemplo ya resuelto
+    resolver12(new Event("submit"));
+    resolver13(new Event("submit"));
+    resolver35(new Event("submit"));
+    resolver8(new Event("submit"));
+  </script>
+</body>
+</html>
