@@ -1,0 +1,384 @@
+/* =========================================================
+   ESTILOS - El hombre que calculaba
+   Paleta: noche en Bagdad (azul lapislázuli, dorado, turquesa)
+   ========================================================= */
+
+/* 1. COLORES (variables). Si quieres cambiar la paleta, solo cambia estos valores */
+:root {
+  --fondo: #f1e6cb;        /* arena */
+  --tarjeta: #fbf6e7;      /* arena clara */
+  --tarjeta-2: #e9dcb8;
+  --texto: #162447;        /* azul muy oscuro */
+  --texto-suave: #485372;
+  --borde: #cdb88a;
+  --dorado: #8f6209;
+  --turquesa: #0c7473;     /* resultado correcto */
+  --coral: #ae3427;        /* error */
+  --boton: #1b2e5e;
+  --texto-boton: #fbf3dc;
+  --cabecera: #1b2e5e;     /* lapislázuli */
+  --texto-cabecera: #f6ebd0;
+  --dorado-claro: #e3b14f;
+}
+
+/* Modo oscuro: se activa solo si el celular o la computadora lo usan */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #0c1630;
+    --tarjeta: #132244;
+    --tarjeta-2: #1c3060;
+    --texto: #f3e8cc;
+    --texto-suave: #aeb8d2;
+    --borde: #2c4379;
+    --dorado: #e3b14f;
+    --turquesa: #52d3c6;
+    --coral: #ff8f80;
+    --boton: #e3b14f;
+    --texto-boton: #0c1630;
+    --cabecera: #081023;
+  }
+}
+
+/* 2. BASE */
+* {
+  box-sizing: border-box;   /* el padding no agranda las cajas */
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* Contenedor central: limita el ancho y deja espacio a los lados */
+.contenedor {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* 3. CABECERA con patrón de rombos (estilo árabe) */
+.cabecera {
+  background-color: var(--cabecera);
+  background-image:
+    repeating-linear-gradient(45deg, rgba(227, 177, 79, 0.16) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(-45deg, rgba(227, 177, 79, 0.16) 0 1px, transparent 1px 26px);
+  color: var(--texto-cabecera);
+  border-bottom: 3px solid var(--dorado-claro);
+  padding: 40px 0 36px;
+}
+
+.etiqueta {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dorado-claro);
+  margin: 0;
+}
+
+.cabecera h1 {
+  font-family: "Amiri", Georgia, serif;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);   /* se adapta al tamaño de pantalla */
+  line-height: 1.1;
+  margin: 8px 0;
+}
+
+.cabecera p {
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* 4. PESTAÑAS */
+.pestanas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 4 columnas iguales */
+  gap: 8px;
+  margin: 24px 0 20px;
+}
+
+.pestana {
+  font: inherit;
+  text-align: left;
+  color: var(--texto);
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.pestana small {
+  display: block;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texto-suave);
+}
+
+.pestana span {
+  font-family: "Amiri", Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.pestana.activa {
+  background: var(--tarjeta-2);
+  border-color: var(--dorado);
+  box-shadow: inset 0 -3px 0 var(--dorado);
+}
+
+/* 5. PROBLEMAS (cada uno es una "tarjeta") */
+.problema {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.problema h2 {
+  font-family: "Amiri", Georgia, serif;
+  font-size: clamp(1.7rem, 4.5vw, 2.3rem);
+  line-height: 1.15;
+  margin: 4px 0 16px;
+}
+
+/* Dos columnas: información a la izquierda, formulario a la derecha */
+.columnas {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.ficha h3 {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dorado);
+  margin: 16px 0 6px;
+}
+
+.ficha h3:first-child {
+  margin-top: 0;
+}
+
+.ficha p {
+  margin: 0;
+}
+
+.ficha ol {
+  margin: 0;
+  padding-left: 1.3em;
+}
+
+code {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--tarjeta-2);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* 6. FORMULARIO */
+.formulario {
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.formulario h3 {
+  font-family: "Amiri", Georgia, serif;
+  font-size: 1.3rem;
+  margin: 0 0 12px;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+input {
+  width: 100%;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 1rem;
+  padding: 9px 10px;
+  color: var(--texto);
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+}
+
+input:focus {
+  outline: 2px solid var(--dorado);
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));  /* se acomodan solos */
+  gap: 12px;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;      /* si no caben, bajan de renglón */
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.boton {
+  font: inherit;
+  font-weight: 700;
+  background: var(--boton);
+  color: var(--texto-boton);
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.boton:hover {
+  opacity: 0.88;
+}
+
+.boton-claro {
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid var(--dorado);
+}
+
+.ejemplo {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.78rem;
+  background: transparent;
+  color: var(--texto);
+  border: 1px dashed var(--dorado);
+  border-radius: 999px;
+  padding: 5px 11px;
+  cursor: pointer;
+}
+
+.ejemplo:hover {
+  background: var(--tarjeta-2);
+}
+
+.nota {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  margin: 14px 0 0;
+}
+
+/* 7. RESULTADOS */
+.resultado {
+  margin-top: 16px;
+  border-top: 1px dashed var(--borde);
+  padding-top: 14px;
+}
+
+.sello {
+  display: inline-block;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+
+.sello.bien { color: var(--turquesa); }
+.sello.aviso { color: var(--dorado); }
+.sello.mal { color: var(--coral); }
+
+.mensaje {
+  font-family: "Amiri", Georgia, serif;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  margin: 8px 0;
+}
+
+.subtitulo {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dorado);
+  margin: 14px 0 4px;
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  margin: 0;
+}
+
+.datos dt {
+  color: var(--texto-suave);
+}
+
+.datos dd {
+  margin: 0;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;   /* los números largos no rompen la pantalla */
+}
+
+.explicacion {
+  font-size: 0.92rem;
+  color: var(--texto-suave);
+  margin: 10px 0 0;
+}
+
+.tabla-scroll {
+  overflow-x: auto;     /* la tabla se desliza en celulares */
+  margin-top: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.82rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 6px 10px 6px 0;
+  border-bottom: 1px solid var(--borde);
+  white-space: nowrap;
+}
+
+.pie {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  padding-bottom: 28px;
+}
+
+/* 8. RESPONSIVO: ajustes para pantallas pequeñas */
+@media (max-width: 860px) {
+  .columnas {
+    grid-template-columns: 1fr;   /* una sola columna */
+  }
+}
+
+@media (max-width: 760px) {
+  .pestanas {
+    grid-template-columns: 1fr 1fr;   /* 2 x 2 */
+  }
+}
+
+@media (max-width: 480px) {
+  .problema {
+    padding: 16px;
+  }
+}
